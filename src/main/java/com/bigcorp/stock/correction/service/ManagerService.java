@@ -19,11 +19,7 @@ public class ManagerService {
 
     @Transactional
     public Manager save(Manager manager){
-        if(manager.getTeam().getNom().equals("Equipe principale")){
-            manager.setSalaire(manager.getSalaire() + 1000);
-        }
         Manager savedManager = this.managerDao.save(manager);
-        this.teamService.save(manager.getTeam());
         return savedManager;
     }
 
@@ -35,4 +31,8 @@ public class ManagerService {
         return optionalManager.get();
     }
 
+    @Transactional
+    public void delete(Long id) {
+        managerDao.deleteById(id);
+    }
 }

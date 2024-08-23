@@ -1,6 +1,7 @@
 package com.bigcorp.stock.correction.rest.controller;
 
 import com.bigcorp.stock.correction.model.Manager;
+import com.bigcorp.stock.correction.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,19 +9,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/managers")
 public class ManagerRestController {
 
+    @Autowired
+    private ManagerService managerService;
+
     @GetMapping("/{id}")
     public Manager getManager(@PathVariable("id") Long id){
-        Manager manager = new Manager();
-        manager.setId(id);
-        manager.setNom("JsdsdanJean");
-        manager.setSalaire(3000);
-        return manager;
+       return managerService.findById(id);
     }
 
     @PostMapping
     public Manager save(@RequestBody Manager manager){
-        manager.setNom("J'ai sauvegardé ce manager");
-        return manager;
+        return managerService.save(manager);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id){
+        managerService.delete(id);
     }
 
 }
