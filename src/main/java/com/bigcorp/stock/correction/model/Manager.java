@@ -9,6 +9,10 @@ public class Manager {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name= "TEAM_ID")
+    private Team team;
+
     private String nom;
 
     private String prenom;
@@ -55,6 +59,14 @@ public class Manager {
 
     public void setSalaire(Integer salaire) {
         this.salaire = salaire;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override
