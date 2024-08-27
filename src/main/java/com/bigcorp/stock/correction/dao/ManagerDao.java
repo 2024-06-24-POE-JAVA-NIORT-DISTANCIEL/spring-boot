@@ -19,6 +19,11 @@ public interface ManagerDao extends CrudRepository<Manager, Long>{
     public List<Manager> findByNom(String nom);
 
     /**
+     * Recherche tous les managers par leur email
+     */
+    List<Manager> findByEmail(String email);
+
+    /**
      * Recherche tous les managers par leur nom, en ne tenant pas compte de la casse
      */
     public List<Manager> findByNomIgnoreCase(String nom);

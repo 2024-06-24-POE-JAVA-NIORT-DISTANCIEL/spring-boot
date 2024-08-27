@@ -54,7 +54,6 @@ public class SecurityConfiguration {
      * récupérer les utilisateurs, pour les authentifier.
      * @return
      */
-    @Bean
     public UserDetailsService userDetailsService() {
         // La méthode ci-dessous est dépréciée : il n'est pas conseillé
         // de mettre en dur un login et un mot de passe, mais de
@@ -73,9 +72,11 @@ public class SecurityConfiguration {
 
     /**
      * Spring security demande un passwordencoder : ici, on
-     * utilise BCrypt.
+     * utilise BCrypt (configuré par défaut avec 10 tours) .
+     * Par exemple password devient : $2a$10$phgIasQBRXjA2G29MXsvqujzB1YsXdHYuBifkG4vHcjdSuCFVmmUu
      * @return
      */
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

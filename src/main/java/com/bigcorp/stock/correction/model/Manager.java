@@ -1,6 +1,7 @@
 package com.bigcorp.stock.correction.model;
 
 import jakarta.persistence.*;
+import org.apache.catalina.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,9 +12,11 @@ import java.util.List;
  * Cette entité implémente  UserDetails.
  * Ainsi, Spring Security peut s'en servir
  * pour authentifier des utilisateurs.
+ * Le username de Spring Security correspond ici à l'attribut email
+ * et le password à l'attribut password
  */
 @Entity
-public class Manager {
+public class Manager implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -30,6 +33,10 @@ public class Manager {
     private Integer poids;
 
     private Integer salaire;
+
+    private String email;
+
+    private String password;
 
     public Long getId() {
         return id;
@@ -79,6 +86,18 @@ public class Manager {
         this.team = team;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Manager{" +
@@ -90,5 +109,18 @@ public class Manager {
                 '}';
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 
+    @Override
+    public String getPassword() {
+        return "$2a$10$phgIasQBRXjA2G29MXsvqujzB1YsXdHYuBifkG4vHcjdSuCFVmmUu";
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
 }
