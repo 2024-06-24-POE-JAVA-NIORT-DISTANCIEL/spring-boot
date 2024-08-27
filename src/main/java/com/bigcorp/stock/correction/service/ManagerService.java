@@ -35,4 +35,5 @@ public class ManagerService {
     public void delete(Long id) {
         managerDao.deleteById(id);
     }
+
 }

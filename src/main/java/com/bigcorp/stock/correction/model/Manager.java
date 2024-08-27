@@ -1,9 +1,19 @@
 package com.bigcorp.stock.correction.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Cette entité implémente  UserDetails.
+ * Ainsi, Spring Security peut s'en servir
+ * pour authentifier des utilisateurs.
+ */
 @Entity
-public class Manager {
+public class Manager implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -79,4 +89,20 @@ public class Manager {
                 ", salaire=" + salaire +
                 '}';
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getPassword() {
+        return "$2a$10$HrQnKAPbFAAe9VKN1Af.EehkwLljrYzJn7ZvBh8Qgpa27cfpPDzxe";
+    }
+
+    @Override
+    public String getUsername() {
+        return this.nom;
+    }
+
 }
