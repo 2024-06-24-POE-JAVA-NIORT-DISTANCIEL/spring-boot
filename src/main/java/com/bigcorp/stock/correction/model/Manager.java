@@ -13,7 +13,7 @@ import java.util.List;
  * pour authentifier des utilisateurs.
  */
 @Entity
-public class Manager implements UserDetails {
+public class Manager {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -90,19 +90,5 @@ public class Manager implements UserDetails {
                 '}';
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return "$2a$10$HrQnKAPbFAAe9VKN1Af.EehkwLljrYzJn7ZvBh8Qgpa27cfpPDzxe";
-    }
-
-    @Override
-    public String getUsername() {
-        return this.nom;
-    }
 
 }

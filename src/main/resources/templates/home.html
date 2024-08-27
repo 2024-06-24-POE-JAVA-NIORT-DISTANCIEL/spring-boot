@@ -9,5 +9,10 @@
 
 <body>
 <h1>Bienvenue !</h1>
+C'est super, cette page a été générée par Spring Web et Thymeleaf.
+<div th:text="${monObjet.mot}" class="classe-statique" th:class="${monObjet.classeDynamique}">
+    Dans ce span, le code HTML est statique.
+</div>
+
 </body>
 </html>

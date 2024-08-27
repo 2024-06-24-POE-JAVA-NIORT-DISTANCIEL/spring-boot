@@ -27,14 +27,13 @@ public class SecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         //Réutilisation de HttpSecurity fourni par SpringSecurity
         http
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         // les URLs ci-dessous peuvent être requêtées par tout le monde
-                        .requestMatchers("/", "/home", "/login", "/error","/logout", "/managers/**").permitAll()
+                        .requestMatchers("/", "/home", "/login", "/error", "/logout", "/managers/**", "/teams/**").permitAll()
                         // Toute autre requête ne peut être émise que par une personne
                         // authentifiée
                         .anyRequest().authenticated())
@@ -55,6 +54,7 @@ public class SecurityConfiguration {
      * récupérer les utilisateurs, pour les authentifier.
      * @return
      */
+    @Bean
     public UserDetailsService userDetailsService() {
         // La méthode ci-dessous est dépréciée : il n'est pas conseillé
         // de mettre en dur un login et un mot de passe, mais de
@@ -76,7 +76,6 @@ public class SecurityConfiguration {
      * utilise BCrypt.
      * @return
      */
-    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

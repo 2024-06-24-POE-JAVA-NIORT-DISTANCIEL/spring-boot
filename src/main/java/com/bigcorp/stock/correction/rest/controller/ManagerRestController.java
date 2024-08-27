@@ -13,8 +13,15 @@ public class ManagerRestController {
     private ManagerService managerService;
 
     @GetMapping("/{id}")
-    public Manager getManager(@PathVariable("id") Long id){
+    public Manager getManagerWithPathVariable(@PathVariable("id") Long id){
+        System.out.println("Appel de getManagerWithPathVariable");
        return managerService.findById(id);
+    }
+
+    @GetMapping
+    public Manager getManagerWithRequestParam(@RequestParam("id") Long id){
+        System.out.println("Appel de getManagerWithRequestParam");
+        return managerService.findById(id);
     }
 
     @PostMapping

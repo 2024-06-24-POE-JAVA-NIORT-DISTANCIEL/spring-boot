@@ -4,12 +4,16 @@ import com.bigcorp.stock.correction.dao.ManagerDao;
 import com.bigcorp.stock.correction.model.Manager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ManagerService {
+public class ManagerService{
 
     @Autowired
     private ManagerDao managerDao;
@@ -35,5 +39,10 @@ public class ManagerService {
     public void delete(Long id) {
         managerDao.deleteById(id);
     }
+
+    public Iterable<Manager> findAll(){
+        return this.managerDao.findAll();
+    }
+
 
 }

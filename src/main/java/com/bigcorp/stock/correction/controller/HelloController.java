@@ -1,8 +1,13 @@
 package com.bigcorp.stock.correction.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
 
 @Controller
 public class HelloController {
@@ -22,13 +27,16 @@ public class HelloController {
     public MonObjet getMonObjet(){
         return new MonObjet();
     }
+
+
     private class MonObjet {
 
         private String mot = "coucou";
         private int entier = 42;
+        private String classeDynamique = "ma-classe-dynamique";
 
         public String getMot() {
-            return mot;
+            return LocalDateTime.now().toString();
         }
 
         public void setMot(String mot) {
@@ -41,6 +49,14 @@ public class HelloController {
 
         public void setEntier(int entier) {
             this.entier = entier;
+        }
+
+        public String getClasseDynamique() {
+            return classeDynamique;
+        }
+
+        public void setClasseDynamique(String classeDynamique) {
+            this.classeDynamique = classeDynamique;
         }
     }
 }
